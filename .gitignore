@@ -1,0 +1,10 @@
+# token存放处
+key.js
+
+# 引入的模块
+node_modules
+
+# http 请求
+.http
+
+
