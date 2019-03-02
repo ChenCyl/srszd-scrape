@@ -3,12 +3,12 @@ const axios = require('axios')
 const key = require("./key.js")
 
 // 第一个月的日程数
-let oneMonthSchedule = 0
+let oneMonthSchedule = 3
 
 let scrape = async () => {
 
-    // const browser = await puppeteer.launch();
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch();
+    // const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto('http://www.etmskies.com/richeng.asp?natureA=4', { waitUntil: 'load', timeout: 100000 });
 
@@ -21,8 +21,8 @@ let scrape = async () => {
         });
         // 如果实时行程数不变则刷新
         if (realTimeScheduleNum == oneMonthSchedule) {
-            await console.log("没有新行程，将在 5s 后刷新页面")
-            await page.waitFor(5000)
+            await console.log("没有新行程，将在 20s 后刷新页面")
+            await page.waitFor(20000)
             await page.reload()
         }
         else {
@@ -48,6 +48,7 @@ function sharetoWeibo() {
             console.log("Share to weibo successfully");
         }).catch(err => {
             console.log(err)
+            sharetoWeibo()
         })
 }
 
